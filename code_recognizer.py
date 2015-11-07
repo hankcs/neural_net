@@ -24,7 +24,7 @@ class NN2(NN):
             for p in patterns:
                 inputs = p[0]
                 targets = p[1]
-                self.update(inputs)
+                self.runNN(inputs)
                 error = error + self.backPropagate(targets, N, M)
             if i % 10 == 0:
                 sys.stderr.write('%1.3f... ' % error)
@@ -35,7 +35,7 @@ class NN2(NN):
     def test(self, patterns):
         hits = 0
         for p in patterns:
-            hits = hits + self.compare(p[1], self.update(p[0]))
+            hits = hits + self.compare(p[1], self.runNN(p[0]))
         hit_rate = (100.0*hits)/len(patterns)
         sys.stderr.write('\nSuccess rate against test data: %.2f%%\n' % hit_rate)
 
